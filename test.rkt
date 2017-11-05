@@ -17,7 +17,15 @@
 ;;;functions
 
 
-(define (prime-factors-readable n)
-    (define (max-divisor-power divisor divident) (maximum (filter (lambda (x) (divides? (expt divisor x) divident)) (range 1 (+ divident 1)))))
-    (define (get-factor-primes number) (filter (lambda (x) (divides? x number)) (sieve-of-eratosthenes number)))
-    (map (lambda (prime-factor) (cons prime-factor (max-divisor-power prime-factor n))) (get-factor-primes n)))
+;;; (define (prime-factors-readable n)
+;;;     (define (max-divisor-power divisor divident) (maximum (filter (lambda (x) (divides? (expt divisor x) divident)) (range 1 (+ divident 1)))))
+;;;     (define (get-factor-primes number) (filter (lambda (x) (divides? x number)) (sieve-of-eratosthenes number)))
+;;;     (map (lambda (prime-factor) (cons prime-factor (max-divisor-power prime-factor n))) (get-factor-primes n)))
+
+
+
+(define (repeat n x) 
+    (map (const x) (range 0 n)))
+
+(repeat 5 3)
+

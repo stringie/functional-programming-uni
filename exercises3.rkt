@@ -101,9 +101,9 @@
 ; > (count-occurrences '(1 2 3 2 1 4 1 2 3) '(1 2)) -> 2
 (define (count-occurrences xs subs) 
     (define (get-sublists xs n)
-    (if (< (length xs) n)
-        null 
-        (cons (take xs n) (get-sublists (cdr xs) n))))
+        (if (< (length xs) n)
+            null 
+            (cons (take xs n) (get-sublists (cdr xs) n))))
     (length (filter (lambda (x) (equal? x subs)) (get-sublists xs (length subs)))))
 
 
