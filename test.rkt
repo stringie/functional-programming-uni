@@ -22,10 +22,4 @@
 ;;;     (define (get-factor-primes number) (filter (lambda (x) (divides? x number)) (sieve-of-eratosthenes number)))
 ;;;     (map (lambda (prime-factor) (cons prime-factor (max-divisor-power prime-factor n))) (get-factor-primes n)))
 
-
-
-(define (repeat n x) 
-    (map (const x) (range 0 n)))
-
-(repeat 5 3)
-
+(list-ref '(1 2 3) 2)

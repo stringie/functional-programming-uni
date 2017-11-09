@@ -194,3 +194,5 @@
  (prime-factors 792)
  (prime-factors 1024)
  )
+
+ (#%provide sieve-of-eratosthenes)

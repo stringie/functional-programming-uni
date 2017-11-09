@@ -183,3 +183,5 @@
  (matrix-multiply '((1 1) (0 1)) '((1 2 3) (4 5 6)))
  (matrix-multiply '((1 1) (0 0)) '((1 2 3) (4 5 6)))
  )
+
+ (#%provide transpose)
