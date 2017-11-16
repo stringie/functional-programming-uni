@@ -14,12 +14,13 @@
     (sieve (range 2 (+ n 1))))
 (define (prime-factors n)
     (map (lambda (x) (cons x (maximum (filter (lambda (z) (divides? (expt x z) n)) (range 1 n))))) (filter (lambda (x) (divides? x n)) (sieve-of-eratosthenes n))))
+
+(define (remove-duplicates x) 
+    (define (remove x a) 
+        (cond [(null? x) null]
+            [(= (car x) a) (remove (cdr x) a)] 
+            [else (cons (car x) (remove (cdr x) a))]))
+    (if (null? x) null (cons (car x) (remove-duplicates (remove (cdr x) (car x))))))
 ;;;functions
 
-
-;;; (define (prime-factors-readable n)
-;;;     (define (max-divisor-power divisor divident) (maximum (filter (lambda (x) (divides? (expt divisor x) divident)) (range 1 (+ divident 1)))))
-;;;     (define (get-factor-primes number) (filter (lambda (x) (divides? x number)) (sieve-of-eratosthenes number)))
-;;;     (map (lambda (prime-factor) (cons prime-factor (max-divisor-power prime-factor n))) (get-factor-primes n)))
-
-(list-ref '(1 2 3) 2)
+;;; (- (char->integer (string-ref "ab3d" 2)) (char->integer #\0))
