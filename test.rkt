@@ -14,13 +14,41 @@
     (sieve (range 2 (+ n 1))))
 (define (prime-factors n)
     (map (lambda (x) (cons x (maximum (filter (lambda (z) (divides? (expt x z) n)) (range 1 n))))) (filter (lambda (x) (divides? x n)) (sieve-of-eratosthenes n))))
-
+(define (descending? x) 
+        (define (num-to-digits y) (if (= y 0) null (cons (remainder y 10) (num-to-digits (quotient y 10)))))
+        (if (< x 10) #t (apply <= (num-to-digits x))))
 (define (remove-duplicates x) 
     (define (remove x a) 
         (cond [(null? x) null]
             [(= (car x) a) (remove (cdr x) a)] 
             [else (cons (car x) (remove (cdr x) a))]))
     (if (null? x) null (cons (car x) (remove-duplicates (remove (cdr x) (car x))))))
-;;;functions
 
-;;; (- (char->integer (string-ref "ab3d" 2)) (char->integer #\0))
+(define (num-bigger-elements lst) 
+    (map (lambda(x) (cons x (length (filter (lambda(y) (> y x)) lst)))) lst))
+(define (switchsum f g n) 
+    (define (summer a x) 
+        (define (applier b x) 
+            (cond [(= b 0) x]
+                  [(even? b) (g (applier (- b 1) x))]
+                  [(odd? b) (f (applier (- b 1) x))]))
+        (if (= a 0) 0 (+ (applier a x) (summer (- a 1) x))))
+    (lambda(x) (summer n x)))
+(define (repeater str)  
+    (define (appender n glue) 
+        (if (= n 1) str (string-append (string-append str glue) (appender (- n 1) glue))))
+    (lambda(c g) (appender c g)))
+(define (sum-sum-digit a b k) 
+    (define (sum-digit? x) 
+        (define (num-to-digits y) 
+            (if (= y 0) null (cons (remainder y 10) (num-to-digits (quotient y 10)))))
+        (= (remainder (apply + (num-to-digits x)) k) 0))
+    (apply + (filter sum-digit? (range a (+ b 1)))))
+(define (pair-compose fs) 
+    (define (composer f x) 
+        (cond [(null? f) 0]
+              [(and (null? (cdr f)) (odd? (length f))) ((car f) x)]
+              (else (+ ((car f) ((cadr f) x)) (composer (cddr f) x)))))
+    (lambda(x) (composer fs x)))
+(define (add2 x) (add1 (add1 x)))
+;;;functions
