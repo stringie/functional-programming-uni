@@ -169,7 +169,9 @@
 ; (diagonal-product '((1 0 3)
 ;                     (0 2 0)
 ;                     (1 0 3))) → 10
-(define (diagonal-product matrix) #f)
+(define (diagonal-product matrix) 
+    (sum (map * (map (lambda(x) (list-ref (list-ref matrix x) x)) (range 0 (length matrix))) ;; first diagonal
+                (map (lambda(x) (list-ref (list-ref matrix x) (- (- (length matrix) 1) x))) (range 0 (length matrix)))))) ;; second diagonal
 
 (examples
  (diagonal-product '((1 0 1)
