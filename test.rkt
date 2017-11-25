@@ -53,7 +53,7 @@
 (define (sum-sum-digit a b k) 
     (define (sum-digit? x) 
         (divides? k (sum (int->list x))))
-    (sum (filter sum-digit? (irange a b)))
+    (sum (filter sum-digit? (irange a b))))
 
 (define (pair-compose fs) 
     (define (composer f x) 
@@ -67,6 +67,10 @@
 (define (where predicates elements) 
     (if (null? predicates) elements (where (cdr predicates) (filter (car predicates) elements))))
 
+(define (sum-numbers a b)
+    (define (descending-number? x) (descending? (int->list x)))
+    (sum (filter descending-number? (irange a b))))
+
 (define (sublists l)
         (define (taker elements count) 
             (if (= 0 count) null (cons (take elements count) (taker elements (- count 1))))) 
@@ -77,10 +81,8 @@
 
 (define (max-ordered-sublist lst)
     (argmax length (filter ascending? (sublists lst))))
+
 ;;;function
 
-(define (sum-numbers a b)
-    (define (descending-number? x) (descending? (int->list x)))
-    (sum (filter descending-number? (irange a b))))
 
-(sum-numbers 1 9)
+
