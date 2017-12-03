@@ -1,4 +1,6 @@
-boomBangs xs = [if x < 10 then "Boom" else "Bang" | x <- xs, even x]
+factoriel :: Integer -> Integer
+factoriel n = product [1..n]
+
 
 main = do
-    print (boomBangs [1..20])
+    print (factoriel 2)
