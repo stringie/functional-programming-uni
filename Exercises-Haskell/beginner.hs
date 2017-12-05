@@ -1,6 +1,9 @@
-oddSquareSum :: Integer
-oddSquareSum = sum $ takeWhile (<1000) $ filter odd $ map (^2) [1..]
+import Data.List
+import Data.Function
+import Data.Char
+import qualified Data.Map as Map
+
 
 
 main = do
-    print $ oddSquareSum
+    Map.fromList [("betty","555-2938"),("bonnie","452-2928"),("lucille","205-2928")]
