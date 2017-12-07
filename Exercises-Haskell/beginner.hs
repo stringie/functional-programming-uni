@@ -1,9 +1,7 @@
-import Data.List
-import Data.Function
-import Data.Char
-import qualified Data.Map as Map
+data Vector a = Vector a a a deriving (Show)
 
-
+vplus :: Num a => Vector a -> Vector a -> Vector a
+(Vector i j k) `vplus` (Vector l m n) = (Vector (i+l) (m+j) (k+n))
 
 main = do
-    Map.fromList [("betty","555-2938"),("bonnie","452-2928"),("lucille","205-2928")]
+    print $ (Vector 1 2.0 3) `vplus` (Vector 3 2 1)
