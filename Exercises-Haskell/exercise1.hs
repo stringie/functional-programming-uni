@@ -104,6 +104,10 @@ n ## k = sum $ map (^k) listNums
         where listNums = intToList n
 
 
+-- Задача 7. Безкраен списък от питагорови тройки
+pythagoranTree :: [Integer]
+pythagoranTree n = n : pythagoranTree (n + 1)
+
 -- main функция с примерни извиквания
 main :: IO()
 main = do 
