@@ -66,7 +66,24 @@ dot :: (Num a) => [a] -> [a] -> a
 v `dot` u = sum $ zipWith (*) v u 
 
 sumUnique :: [[Integer]] -> Integer
-sumUnique xxs = sum . concat . filter ((==1) . length) . concat . map (group . sort) $ xxs
+sumUnique = sum . concat . filter ((==1) . length) . concat . map (group . sort)
+
+eye :: Integer -> [[Integer]]
+eye n = map (\x -> map (\y -> if x == y then 1 else 0) [1..n]) [1..n]
+
+matrixProduct :: [[Integer]] -> [[Integer]] -> [[Integer]]
+matrixProduct xss yss = map (\xs -> map (\ys -> (xs `dot` ys)) (transpose yss)) xss
+
+catesianProduct :: [Integer] -> [Integer] -> [(Integer, Integer)]
+catesianProduct xs ys = concat $ map (\x -> map (\y -> (x, y)) ys) xs
+
+isMatrix :: [[Integer]] -> Bool
+isMatrix = (==1) . length . nub . map length
+
+checkPermutation :: [Int] -> [Int] -> Bool
+checkPermutation xs ys = (mapToPrimes xs) == (mapToPrimes ys)
+    where mapToPrimes = product . map (\x -> sieve !! x)
+          sieve = sieveOfEratosthenes 1000000000
 
 main = do 
-    print $ replicate 10 (1,1)
+    print $ 
