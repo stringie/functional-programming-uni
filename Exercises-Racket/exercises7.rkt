@@ -79,7 +79,7 @@
 
 (examples
  (count-min-crosses '(0 1 2 3 4))
- (count-min-crosses '(-1 1 -1 1))
+ (count-min-crosses '(-1 0 0 0 1))
  )
 
 ; Задача 4. Дефинирайте функцията (reverse-column i xss),

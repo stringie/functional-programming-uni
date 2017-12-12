@@ -1,4 +1,5 @@
 import Data.List
+import Data.Ord
 import Data.Function
 
 qsort :: [Integer] -> [Integer]
@@ -85,5 +86,14 @@ checkPermutation xs ys = (mapToPrimes xs) == (mapToPrimes ys)
     where mapToPrimes = product . map (\x -> sieve !! x)
           sieve = sieveOfEratosthenes 1000000000
 
+countMinOccurances :: [Integer] -> Int
+countMinOccurances = pred . length . groupBy ((==) `on` (>0))
+
+argmax :: (Num a, Ord a, Ord b) => (a -> b) -> [a] -> a
+argmax f = maximumBy (comparing f)
+
+argmin :: (Num a, Ord a, Ord b) => (a -> b) -> [a] -> a
+argmin f = minimumBy (comparing f)
+
 main = do 
-    print $ 
+    print ()
