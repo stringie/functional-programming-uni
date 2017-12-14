@@ -262,7 +262,7 @@ main = do
     -- Примери
     print $ factorial 5
     print $ my_reverse' [1, 2, 3, 4]
-    print $ my_reverse'' [1, 2, 3, 4]
+    print $ my_revers[(Cell 0 0), (Cell 0 1), (Cell 1 0), (Cell 1 1)]e'' [1, 2, 3, 4]
     print $ my_sum' [1, 2, 3, 4]
     print $ my_sum'' [1, 2, 3, 4]
 
