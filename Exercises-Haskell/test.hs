@@ -1,4 +1,7 @@
-import Data.Either
+data Cell = Cell { x :: Integer, y :: Integer} deriving (Show)
+type board = [Cell]
 
-main = do
-    print $ splitAt 2 [1,2,3,4]
+tic board = 
+
+gameOfLife board 0 = board 
+gameOfLife board n = gameOfLife (tic board) (n-1)
