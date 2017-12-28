@@ -19,4 +19,4 @@ neighborsAndSelf (Cell x y) = [Cell (x + i) (y + j) | i <- [-1 .. 1], j <- [-1 .
 main :: IO()
 main = let board = map (uncurry Cell) [(0, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
     in do
-        print $ gameOfLife board 3
+        print $ gameOfLife board 1
