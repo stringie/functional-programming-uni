@@ -4,7 +4,7 @@ type Cell = (Integer, Integer)
 type Board = [Cell]
 
 gameOfLife :: Board -> Int -> Board
-gameOfLife board n = iterate tick board !! n
+gameOfLife board n = iterate tick (sort board) !! n
 
 tick :: Board -> Board
 tick board = [c | gs@(c:cs) <- groups, length gs == 3 || (length gs == 2 && c `elem` board)]
@@ -16,4 +16,4 @@ neighbors (x, y) = [((x + i), (y + j)) | i <- [-1 .. 1], j <- [-1 .. 1], (i, j) 
 main :: IO()
 main = let board = [(2, 1), (0, 1), (1, 2), (2, 0), (2, 2)]
     in do
-        print $  gameOfLife board 1
+        print $  group $ sort $ concatMap neighbors board

@@ -13,8 +13,11 @@ n `choose` 0 = 1
 n `choose` k = (n / k) * ((n - 1) `choose` (k - 1))
 
 intToList :: Integer -> [Integer]	
-intToList 0 = []
-intToList n = intToList (n `div` 10) ++ [n `mod` 10]
+intToList n
+    | n == 0 = [0]
+    | otherwise = toList n
+        where toList 0 = []
+              toList n = toList (n `div` 10) ++ [(n `mod` 10)] 
 
 listToInt :: [Integer] -> [Integer]
 listToInt = scanl1 (\acc x-> (acc * 10) + x)
