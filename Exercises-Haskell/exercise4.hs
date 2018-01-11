@@ -83,7 +83,7 @@ reverse xs = foldr (\x acc -> acc ++ [x]) [] xs
     compose [(+1), (2*)] 7 -> (2 * 7) + 1 = 15
 -}
 compose :: [(a -> a)] -> (a -> a)
-compose fs = foldl (\acc x -> x acc) (\x -> x) fs
+compose fs = foldr (.) id fs
 
 
 {-
@@ -105,7 +105,8 @@ compose fs = foldl (\acc x -> x acc) (\x -> x) fs
     менюта      = combinations [предястия, основни, десерти]
 -}
 combinations :: [[a]] -> [[a]]
-combinations xss = undefined
+combinations xss = foldl prod [[]] xss
+    where prod yss xs = [ys ++ [x] | ys <- yss, x <- xs]
 
 
 {-
@@ -124,7 +125,6 @@ combinations xss = undefined
 -}
 splitEven :: (Integral n) => [n] -> (n, n)
 splitEven gifts = undefined
-
 
 -- примери от условията
 main :: IO()
@@ -146,7 +146,9 @@ main = do
     print $ compose [(+1), (2*)] 7
 
     -- Задача 4.
-    print $ combinations [[1, 2, 3], [4], [5, 6]]
+    print $ combinations [[1, 2, 3], [5,6]]
+    print $ менюта
 
     -- Задача 5.
     print $ splitEven [3, 2, 3, 2, 2, 77, 89, 23, 90, 11]
+    
