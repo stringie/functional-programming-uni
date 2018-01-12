@@ -1,6 +1,5 @@
 data Tree a = Empty | Node a (Tree a) (Tree a) deriving (Show, Read)
 
-
 inOrder :: Tree a -> [a]
 inOrder Empty = []
 inOrder (Node v left right) = inOrder left ++ [v] ++ inOrder right
@@ -16,12 +15,8 @@ postOrder (Node v left right) = postOrder left ++ postOrder right ++ [v]
 levelOrder :: Tree a -> [a]
 levelOrder tree = helper [tree]
     where helper [] = []
-          helper xs = map value xs ++ helper (concatMap leftAndRight xs)
-          value (Node a _ _) = a
-          leftAndRight (Node _ Empty Empty) = []
-          leftAndRight (Node _ l Empty) = [l]
-          leftAndRight (Node _ Empty r) = [r]
-          leftAndRight (Node _ l r) = [l, r]
+          helper (Empty:xs) = helper xs
+          helper ((Node v l r):xs) = v : helper (xs ++ [l,r])
 
 main = do
-    print $ levelOrder (Node 1 (Node 2 (Node 3 Empty Empty) (Node 4 Empty Empty)) (Node 5 (Node 6 Empty Empty) Empty))
+    print $ levelOrder (Node 1 (Node 2 (Node 4 Empty Empty) Empty) (Node 3 Empty Empty))
