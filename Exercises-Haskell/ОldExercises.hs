@@ -19,8 +19,8 @@ intToList n
         where toList 0 = []
               toList n = toList (n `div` 10) ++ [(n `mod` 10)] 
 
-listToInt :: [Integer] -> [Integer]
-listToInt = scanl1 (\acc x-> (acc * 10) + x)
+listToInt :: [Integer] -> Integer
+listToInt = foldl1 (\acc x-> (acc * 10) + x)
 
 reverseNum :: Integer -> Integer
 reverseNum = listToInt . reverse . intToList
@@ -72,6 +72,10 @@ v `dot` u = sum $ zipWith (*) v u
 sumUnique :: [[Integer]] -> Integer
 sumUnique = sum . concat . filter ((==1) . length) . concat . map (group . sort)
 
+transpose' :: [[Integer]] -> [[Integer]]
+transpose' ([]:_) = []
+transpose' matrix = (map head matrix) : transpose (map tail matrix)
+
 eye :: Integer -> [[Integer]]
 eye n = map (\x -> map (\y -> if x == y then 1 else 0) [1..n]) [1..n]
 
@@ -99,4 +103,4 @@ argmin :: (Num a, Ord a, Ord b) => (a -> b) -> [a] -> a
 argmin f = minimumBy (comparing f)
 
 main = do 
-    print $ listToInt [1,2,3]
+    print $ reverseNum 123
