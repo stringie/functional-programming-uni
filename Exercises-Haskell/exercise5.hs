@@ -344,4 +344,4 @@ main = let
         print $ bstInsert tree 7
 
         -- Задача 7.
-        print $ bstRemove tree 4        
+        print $ bstRemove (Node 2 (Node 1 Empty Empty) (Node 4 (Node 3 Empty Empty) (Node 5 Empty Empty))) 4    
