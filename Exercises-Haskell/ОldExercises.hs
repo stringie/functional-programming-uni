@@ -88,6 +88,11 @@ catesianProduct xs ys = concat $ map (\x -> map (\y -> (x, y)) ys) xs
 isMatrix :: [[Integer]] -> Bool
 isMatrix = (==1) . length . nub . map length
 
+permutations' :: [a] -> [[a]]
+permutations' xs = foldl (\acc x -> concatMap (`insertEverywhere`x) acc) [[]] xs
+    where insert' (xs, i) x = if i == 0 then x:xs else (head xs):(insert' ((tail xs), (i-1)) x)
+          insertEverywhere xs x = map (\i -> insert' (xs, i) x) [0..(length xs)]
+
 checkPermutation :: [Int] -> [Int] -> Bool
 checkPermutation xs ys = (mapToPrimes xs) == (mapToPrimes ys)
     where mapToPrimes = product . map (\x -> sieve !! x)
@@ -96,6 +101,9 @@ checkPermutation xs ys = (mapToPrimes xs) == (mapToPrimes ys)
 countMinOccurances :: [Integer] -> Int
 countMinOccurances = pred . length . groupBy ((==) `on` (>0))
 
+subsets :: [a] -> [[a]]
+subsets xs = foldr (\x yss -> yss ++ [x:ys | ys <- yss]) [[]] xs
+
 argmax :: (Num a, Ord a, Ord b) => (a -> b) -> [a] -> a
 argmax f = maximumBy (comparing f)
 
@@ -103,4 +111,4 @@ argmin :: (Num a, Ord a, Ord b) => (a -> b) -> [a] -> a
 argmin f = minimumBy (comparing f)
 
 main = do 
-    print $ reverseNum 123
+    print $ permutations' [1,2,3]

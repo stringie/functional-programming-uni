@@ -65,4 +65,4 @@ inOrder Empty = []
 inOrder (Node v left right) = inOrder left ++ [v] ++ inOrder right
 
 main = do
-    print $ getLevels (Node 1 (Node 2 Empty (Node 7 Empty (Node 8 Empty Empty))) (Node 3 (Node 5 Empty (Node 6 Empty Empty)) (Node 4 Empty Empty)))
+    print $ subsequences pointsArr
